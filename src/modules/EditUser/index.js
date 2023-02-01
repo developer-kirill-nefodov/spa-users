@@ -1,11 +1,14 @@
 import React from 'react';
+import {useParams} from "react-router-dom";
 
-const ListUsers = () => {
+const EditUser = () => {
+  const {id} = useParams();
+
   return (
     <div>
-      
+      Edit user {id}
     </div>
   );
 };
 
-export default ListUsers;
+export default EditUser;
