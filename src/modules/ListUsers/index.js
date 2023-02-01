@@ -1,9 +1,10 @@
 import React from 'react';
+import TableListUser from "../../components/TableListUsers";
 
 const ListUsers = () => {
   return (
     <div>
-      List users
+      <TableListUser/>
     </div>
   );
 };
