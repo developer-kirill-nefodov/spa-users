@@ -1,11 +1,41 @@
 .wrapper-table {
-  min-width: fit-content;
-  max-width: 900px;
-  background: rgb(5 148 255 / 10%);
+  width: 850px;
+  background: linear-gradient(to right, #8a2387, #e94057, #f27121);
   padding: 10px 15px;
 }
 
 .ant-table-cell {
   font-size: 20px;
-  border-bottom: 2px solid #f0f0f0 !important;
+  border-bottom: 2px solid #e94057 !important;
+}
+
+.render-row {
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.col-g {
+  color: green;
+}
+
+.col-r {
+  color: red;
+}
+
+.wrapper-mobile-carts {
+  margin: .5em;
+}
+
+@media (max-width: 900px) {
+  .wrapper-table {
+    width: 90vw;
+  }
+}
+
+.wrapper-mobile-carts p {
+  letter-spacing: .05em;
+  text-shadow:
+      0 -1px 0 #fff,
+      0 1px 0 #2e2e2e,
+      0 10px 15px rgba(0, 0, 0, 0.9);
 }

@@ -1,9 +1,13 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
+import {useNavigate} from "react-router-dom";
 import {Form, Input, Button, Radio, Select} from 'antd';
 
-import {getOneUser} from "../../utils/api/user";
+import {createUser, getOneUser, updateUser} from "../../utils/api/user";
+
+import LabelForm from "./LabelForm";
 
 import './style.css';
+import Toastify, {toast} from "../Toastify";
 
 const initialState = {
   id: '',
@@ -14,55 +18,105 @@ const initialState = {
 }
 
 const FormUser = ({type, userID}) => {
+  const navigate = useNavigate();
+
   const [form] = Form.useForm();
 
+  const onReset = () => {
+    form.resetFields();
+  };
+
+  const onFinish = async (user) => {
+    try {
+      if(type === 'Edit') {
+        await updateUser({...user, id: userID});
+        toast('User updated successfully', 'success');
+      } else {
+        const {data} = await createUser(user);
+        toast('User successfully created', 'success');
+        navigate(`/edit/${data.data.id}`);
+      }
+    } catch (e) {
+      if(e.response.status === 422) {
+        toast(e.response.data.data[0].message, 'error');
+      } else {
+        toast(e.response.data.data.message, 'error');
+      }
+    }
+  }
+
   useEffect(() => {
-    if (type === 'Edit') {
+    if (type === 'Edit' && userID) {
       getOneUser(userID)
         .then(({data}) => {
           const user = data.data[0];
           if (user) {
             form.setFieldsValue(user);
+          } else {
+            toast('User with this ID was not found', 'warning');
+            navigate('/users');
           }
         })
-        .catch(console.error);
+        .catch((e) => {
+          toast(e.message, 'error');
+        });
     }
-  }, []);
+  }, [type, userID]);
 
   return (
     <div className='wrapper-form'>
       <div className='form'>
         <Form
           form={form}
-          layout="horizontal"
-          // validateMessages={{}}
+          layout="vertical"
           initialValues={initialState}
-          // onValuesChange={onFormLayoutChange}
-          // disabled={componentDisabled}
-          style={{maxWidth: 600}}
+          onFinish={onFinish}
         >
-          <Form.Item label="Name" name='name' >
-            <Input/>
+          <Form.Item
+            label={<LabelForm name='Name'/>}
+            name='name'
+            rules={[{required: true}]}
+          >
+            <Input size='large' placeholder="Enter your name"/>
           </Form.Item>
-          <Form.Item label="Email" name='email'>
-            <Input/>
+          <Form.Item
+            label={<LabelForm name='Email'/>}
+            name='email'
+            rules={[{required: true, type: 'email'}]}
+          >
+            <Input size='large' placeholder="Enter your email"/>
           </Form.Item>
-
-          <Form.Item label="Gender" name='gender'>
+          <Form.Item
+            label={<LabelForm name='Status'/>}
+            name='status'
+            rules={[{required: true}]}
+          >
+            <Select size='large'>
+              <Select.Option value="active">Active</Select.Option>
+              <Select.Option value="inactive">Inactive</Select.Option>
+            </Select>
+          </Form.Item>
+          <Form.Item
+            label={<LabelForm name='Gender'/>}
+            name='gender'
+            rules={[{required: true}]}
+          >
             <Radio.Group>
               <Radio value="female"> Female </Radio>
               <Radio value="male"> Male </Radio>
             </Radio.Group>
           </Form.Item>
-
-          <Form.Item label="Status" name='status'>
-            <Select>
-              <Select.Option value="active">Active</Select.Option>
-              <Select.Option value="inactive">Inactive</Select.Option>
-            </Select>
-          </Form.Item>
-          <Form.Item style={{margin: 0}}>
-            <Button>{type}</Button>
+          <Form.Item>
+            <div className='submit-button-div'>
+              <Button type='primary' htmlType="submit" size='large'>
+                {type}
+              </Button>
+              {type === 'Create' && (
+                <Button htmlType="button" onClick={onReset} size='large' style={{marginLeft: 10}}>
+                  Reset
+                </Button>
+              )}
+            </div>
           </Form.Item>
         </Form>
       </div>

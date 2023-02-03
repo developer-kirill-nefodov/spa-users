@@ -21,3 +21,16 @@ export const EditUser = (onClick) => (_, data) => {
     </Button>
   )
 }
+
+export const UserList = () => {
+  const navigate = useNavigate();
+  const UserList = () => {
+    navigate('/users');
+  }
+
+  return (
+    <Button type='primary' onClick={UserList}>
+      List User
+    </Button>
+  )
+}

@@ -1,6 +1,8 @@
 import React from "react";
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 
+import Toastify from "./components/Toastify";
+
 import {routes} from "./modules/routes";
 import './App.css';
 
@@ -19,6 +21,8 @@ const App = () => {
           ))}
         </Routes>
       </BrowserRouter>
+
+      <Toastify/>
     </div>
   );
 }

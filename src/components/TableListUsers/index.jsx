@@ -2,12 +2,14 @@ import React, {useEffect, useState} from 'react';
 import {useNavigate} from "react-router-dom";
 import {Table} from "antd";
 
+import {useResizeDevice} from "../../utils/hooks/useResizeDevice";
 import {useGetPaginationData} from "../../utils/hooks/useGetPaginationData";
 import {getListUsers} from "../../utils/api/user";
+import {toast} from "../Toastify";
 
 import {EditUser} from "../ButtonsUser";
 import RenderRow from "./RenderRow";
-import Loading from "../Loading";
+import MobileListUsers from "./MobileListUsers";
 
 import './styles.css';
 
@@ -16,6 +18,8 @@ const TableListUser = () => {
 
   const [total, setTotal] = useState(0);
   const [data, setData] = useState([]);
+
+  const [isDesktop] = useResizeDevice(900);
   const [page, pageSize, onChange] = useGetPaginationData(total);
 
   const editUser = (id) => {
@@ -40,21 +44,33 @@ const TableListUser = () => {
           }
           setData(data.data.map((v, key) => ({...v, key})));
         })
-        .catch(console.error);
+        .catch((e) => {
+          toast(e.message, 'error');
+        });
     }
   }, [page, pageSize]);
 
-  return total ? (
+  return (
     <div className='wrapper-table'>
-      <Table
-        size='large'
-        pagination={{onChange, pageSize, current: page, total}}
-        columns={columns}
-        dataSource={data}
-      />
+      {isDesktop ? (
+        <Table
+          size='large'
+          pagination={{onChange, pageSize, current: page, total}}
+          columns={columns}
+          dataSource={data}
+          loading={!total}
+        />
+      ) : (
+        <MobileListUsers
+          data={data}
+          pageSize={pageSize}
+          current={page}
+          total={total}
+          onChange={onChange}
+          editUser={editUser}
+        />
+      )}
     </div>
-  ) : (
-    <Loading/>
   );
 };
 
