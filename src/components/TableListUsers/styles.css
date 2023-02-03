@@ -1,0 +1,11 @@
+.wrapper-table {
+  min-width: fit-content;
+  max-width: 900px;
+  background: rgb(5 148 255 / 10%);
+  padding: 10px 15px;
+}
+
+.ant-table-cell {
+  font-size: 20px;
+  border-bottom: 2px solid #f0f0f0 !important;
+}
