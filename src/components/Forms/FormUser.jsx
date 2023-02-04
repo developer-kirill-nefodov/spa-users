@@ -31,6 +31,7 @@ const FormUser = ({type, userID}) => {
       if(type === 'Edit') {
         await updateUser({...user, id: userID});
         toast('User updated successfully', 'success');
+        navigate('/users');
       } else {
         const {data} = await createUser(user);
         toast('User successfully created', 'success');

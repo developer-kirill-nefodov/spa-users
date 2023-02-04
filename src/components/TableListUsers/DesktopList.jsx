@@ -17,17 +17,17 @@ const DesktopList = ({data, total, current, pageSize, onChange, editUser}) => {
     {title: "ID", dataIndex: 'id', render: RenderRow},
     {title: "Name", dataIndex: 'name', render: RenderRow},
     {title: "Email", dataIndex: 'email', render: RenderRow},
-    {title: "Gender", dataIndex: 'gender', render: RenderRow},
     {
-      title: "Status",
-      dataIndex: 'status',
-      render: StatusTag,
+      title: "Gender",
+      dataIndex: 'gender',
+      render: RenderRow,
       filters: [
-        {text: 'Active', value: 'active'},
-        {text: 'Inactive', value: 'inactive'},
+        {text: 'Male', value: 'male'},
+        {text: 'Female', value: 'female'},
       ],
-      onFilter: (value, record) => record.status.indexOf(value) === 0,
+      onFilter: (value, record) => !record.gender.indexOf(value),
     },
+    {title: "Status", dataIndex: 'status', render: StatusTag},
     {title: "", dataIndex: 'action', render: EditUser(editUser)},
   ];
 

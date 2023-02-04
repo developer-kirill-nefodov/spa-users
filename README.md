@@ -9,6 +9,11 @@ git clone https://github.com/developer-kirill-nefodov/spa-users.git
 cd ./spa-users/
 ```
 
+Don't forget to fill in the empty fields
+```sh
+cp .env.exemple .env
+```
+
 Run project
 ```sh
 npm install
@@ -19,10 +24,13 @@ npm start
 ```
 
 ## Description
-* spa-open: http://localhost:3000
+* list users: http://localhost:3000/users
+* create user: http://localhost:3000/create
+* edit user: `http://localhost:3000/edit/:id`
 
 ## Technologies:
-* React
-* Redux
-* Redux-Saga
-* Axios
+* react
+* react-router-dom
+* antd
+* axios
+* react-toastify
