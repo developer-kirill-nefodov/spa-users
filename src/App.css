@@ -3,6 +3,10 @@ html, body {
   padding: 0;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   background: rgb(5 148 255 / 10%);
 }

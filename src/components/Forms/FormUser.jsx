@@ -2,12 +2,12 @@ import React, {useEffect} from 'react';
 import {useNavigate} from "react-router-dom";
 import {Form, Input, Button, Radio, Select} from 'antd';
 
+import {toast} from "../Toastify";
 import {createUser, getOneUser, updateUser} from "../../utils/api/user";
 
 import LabelForm from "./LabelForm";
 
 import './style.css';
-import Toastify, {toast} from "../Toastify";
 
 const initialState = {
   id: '',
@@ -101,7 +101,7 @@ const FormUser = ({type, userID}) => {
             name='gender'
             rules={[{required: true}]}
           >
-            <Radio.Group>
+            <Radio.Group className='col-w'>
               <Radio value="female"> Female </Radio>
               <Radio value="male"> Male </Radio>
             </Radio.Group>
@@ -112,7 +112,7 @@ const FormUser = ({type, userID}) => {
                 {type}
               </Button>
               {type === 'Create' && (
-                <Button htmlType="button" onClick={onReset} size='large' style={{marginLeft: 10}}>
+                <Button type='dashed' htmlType="button" onClick={onReset} size='large' style={{marginLeft: 10}}>
                   Reset
                 </Button>
               )}

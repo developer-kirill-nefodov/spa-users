@@ -1,7 +1,8 @@
 .wrapper-table {
   width: 850px;
   background: linear-gradient(to right, #8a2387, #e94057, #f27121);
-  padding: 10px 15px;
+  padding: 15px 15px 10px 15px;
+  border-radius: 20px;
 }
 
 .ant-table-cell {
@@ -24,6 +25,11 @@
 
 .wrapper-mobile-carts {
   margin: .5em;
+}
+
+.item-card {
+  overflow: hidden;
+  margin-bottom: 10px;
 }
 
 @media (max-width: 900px) {

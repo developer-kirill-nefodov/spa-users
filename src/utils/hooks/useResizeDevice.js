@@ -4,10 +4,16 @@ export const useResizeDevice = (minWidth) => {
   const [device, setDevice] = useState(window.matchMedia(`(min-width: ${minWidth}px)`).matches);
 
   useEffect(() => {
-    window.addEventListener('resize', () => {
+    const resize = () => {
       setDevice(window.matchMedia(`(min-width: ${minWidth}px)`).matches);
-    });
-  }, []);
+    }
+
+    window.addEventListener('resize', resize);
+
+    return () => (
+      window.removeEventListener('resize', resize)
+    )
+  }, [minWidth]);
 
   return [device];
 }
