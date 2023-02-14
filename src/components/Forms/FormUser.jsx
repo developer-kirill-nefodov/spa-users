@@ -7,7 +7,7 @@ import {createUser, getOneUser, updateUser} from "../../utils/api/user";
 
 import LabelForm from "./LabelForm";
 
-import './style.css';
+import './styles.css';
 
 const initialState = {
   id: '',
@@ -28,7 +28,7 @@ const FormUser = ({type, userID}) => {
 
   const onFinish = async (user) => {
     try {
-      if(type === 'Edit') {
+      if (type === 'Edit') {
         await updateUser({...user, id: userID});
         toast('User updated successfully', 'success');
         navigate('/users');
@@ -38,7 +38,7 @@ const FormUser = ({type, userID}) => {
         navigate(`/edit/${data.data.id}`);
       }
     } catch (e) {
-      if(e.response.status === 422) {
+      if (e.response.status === 422) {
         toast(e.response.data.data[0].message, 'error');
       } else {
         toast(e.response.data.data.message, 'error');
@@ -62,6 +62,8 @@ const FormUser = ({type, userID}) => {
           toast(e.message, 'error');
         });
     }
+
+    // eslint-disable-next-line
   }, [type, userID]);
 
   return (

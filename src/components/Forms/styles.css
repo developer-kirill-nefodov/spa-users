@@ -10,10 +10,12 @@
 }
 
 .form {
+  margin-top: 80px;
   min-width: 400px;
   padding: 20px;
   background: linear-gradient(to right, #8a2387, #e94057, #f27121);
   border-radius: 20px;
+  height: fit-content;
 }
 
 .form form {
@@ -36,7 +38,7 @@
 
 .submit-button-div {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   margin-right: 20px;
 }
 
@@ -50,7 +52,11 @@
 }
 
 @media (max-width: 600px) {
+  .wrapper-form {
+    align-items: center;
+  }
   .form, .form form {
+    margin-top: 0;
     min-width: 300px;
   }
 }

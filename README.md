@@ -24,9 +24,12 @@ npm start
 ```
 
 ## Description
-* list users: http://localhost:3000/users
-* create user: http://localhost:3000/create
-* edit user: `http://localhost:3000/edit/:id`
+* List users: http://localhost:3000/users
+* Create user: http://localhost:3000/create
+* Edit user: `http://localhost:3000/edit/:id`
+
+
+* Users API: https://gorest.co.in
 
 ## Technologies:
 * react
