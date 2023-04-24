@@ -5,6 +5,14 @@
   border-radius: 20px;
 }
 
+.wrapper-table table {
+  background: white;
+}
+
+.wrapper-table .ant-table-content {
+  overflow: auto;
+}
+
 .ant-table-cell {
   font-size: 20px;
   border-bottom: 2px solid #e94057 !important;
